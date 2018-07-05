@@ -1,0 +1,55 @@
+.image
+{
+    margin-left: 0px;
+}
+.container1
+{
+  width: 92%;
+  height: 80px;
+  margin:auto;
+  overflow:hidden;
+}
+.branding
+{
+  float: left;
+  margin-top: 0px;
+  width: 75%;
+}
+.branding2
+{
+  float: right;
+  margin-top: 0px;
+  width: 20%;
+}
+.branding3
+{
+  float: left;
+ padding-top: 55%;
+}
+.headerlinks:hover{
+  color:#ff0000;
+  font-weight: bold;
+}
+.header-ul{
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+.header-li{
+color:F0F8FF;
+  display: inline;
+  padding: 0 20px 0 20px;
+}
+.headerlinks{
+    color: black;
+}
+.headerlinks:active
+{
+  color: blue;
+  font-weight: bold;
+}
+
+.App-user{
+  float:right;
+  margin:0px;
+}
