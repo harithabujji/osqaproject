@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from "react-router-dom"
 import Cookies from 'universal-cookie';
 import {Redirect} from 'react-router-dom'
 import { withRouter } from 'react-router'
@@ -32,6 +33,11 @@ class Login extends Component{
         e.preventDefault();
         // const {username, password} = this.state
         this.login(this.state)
+
+    }
+      signsubmit = (e) => {
+
+         window.location.href = "http://127.0.0.1:8000/signup";
     }
 
     logout = (props) =>
@@ -63,8 +69,10 @@ class Login extends Component{
                 console.log(this.cookies.get('userJwtToken'));
                 this.props.updateUsername(formData.get('username'));
                 this.props.updateStatus(true);
+
                 this.setState(prev => ( {buttonName : 'Logout'}));
-                this.props.history.push('');
+
+               this.props.history.push('/');
                 console.log("Redirecting....")
             }
             else{
@@ -80,6 +88,7 @@ class Login extends Component{
                 <input onChange={this.saveUsername} type="text" placeholder="Enter username"/><br/>
                 <input onChange={this.savePassword} type="password" placeholder="Enter Password"/><br/>
                 <button onClick={this.submit} className={"btn btn-primary"} value="Login">Login</button>
+                <button onClick={this.signsubmit} className={"btn btn-primary"} value="SignUp">SignUp</button>
             </div>
         )
     }

@@ -11,6 +11,7 @@ import QuestionListContainer from '../Questions/QuestionListContainer'
 
 import Login from '../Authentication/login'
 
+
 import {BrowserRouter as Router,Redirect,Link,Switch,Route} from 'react-router-dom'
 
 
@@ -67,6 +68,7 @@ export class Header extends Component{
                         </p>
                                 </li>
 
+
                                 <li className="header-li">
                                     <Link className="headerlinks" to="/about">About</Link>
                                 </li>
@@ -86,8 +88,13 @@ export class Header extends Component{
                                     isAuthenticated={this.props.isAuthenticated}
                                     username={this.props.username}
                                     updateUsername={this.props.updateUsername}
-                                    updateStatus={this.props.updateLoginStatus}/>
+                                    updateStatus={this.props.updateLoginStatus}
+
+                                    />
+
+
                                 }/>
+
                             <Route path="/faq" component={Home} />
 
                         </Switch>

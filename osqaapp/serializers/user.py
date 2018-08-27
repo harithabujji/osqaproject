@@ -19,5 +19,5 @@ class UserSerializer(serializers.ModelSerializer):
         instance.password = validated_data.get('password', instance.password)
         instance.save()
 
-        
+        z
         return instance

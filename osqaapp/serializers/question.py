@@ -34,13 +34,29 @@ class QuestionModelSerializer(serializers.ModelSerializer):
         return album
 
     def update(self, instance, validated_data):
-        instance.id=validated_data.get('id',instance.id)
-        Tag.objects.filter(question_id=instance.id).delete()
+        instance.id = validated_data.get('id', instance.id)
         instance.title = validated_data.get('title', instance.title)
-        instance.tags=validated_data.get('tags',instance.tags)
         instance.description = validated_data.get('description', instance.description)
+        tag_len = len(instance.tags.split(','))
+        instance.tags = validated_data.get('tags', instance.tags)
+        tags = Tag.objects.filter(question_id=instance.pk)
+        tagname = instance.tags.split(',')
+        index = 0
+        for tag in tags:
+            if len(tagname) < tag_len:
+                if index >= len(tagname):
+                    tag.delete()
+                    continue
+            tag.name = tagname[index]
+            tag.save()
+            index += 1
+        if len(tagname) > tag_len:
+            while len(tagname) != index:
+                Tag.objects.create(name=tagname[index], question=instance)
+                index += 1
         instance.save()
-        for track_data in validated_data['tags'].split(','):
-            Tag.objects.create(name=track_data,question=instance)
         return instance
+
+
+
 

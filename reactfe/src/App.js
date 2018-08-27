@@ -4,12 +4,17 @@ import './App.css';
 
 import TagListContainer from './tag/TagContainer'
 import QuestionListContainer from './Questions/QuestionListContainer'
+import QuestionListContainerD from './Questions/QuestionListContainerD'
 import NewQuestion from './Questions/NewQuestion'
 import PostQuestion from './Questions/PostQuestion'
 import PostComment from './Comment/PostComment'
+import PostAnswer from './Comment/PostAnswer'
 import ViewQuestion from './Questions/ViewQuestion'
 import AnswerQuestion from './Questions/AnswerQuestion'
+
+import UnAnswerQuestion from './Questions/UnanswerQuestion'
 import VoteQuestion from './Questions/VoteQuestion'
+import  SignUp from './Authentication/signup'
 import {Header,Heading} from './Header'
 import {
   BrowserRouter as Router,
@@ -133,14 +138,30 @@ class App extends Component {
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
                     <td><button><Link to={'/answer'}>Most Answered</Link></button></td>
                      <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                     <td><div> <button><Link to={'/post'}>PostQuestion</Link></button></div></td>
                     </tr>
                     </table>
-                    </center>
 
+                    </center>
+                   <div>
+                   <table>
+                   <tr>
+                   <td><img src="osqa.png"></img></td>
+                   <td><button className="main-button">OSQA</button></td></tr>
+                    <tr>
+                   <td><button className="main-button"><Link to={'/unanswer'}>Unanswered</Link></button></td></tr>
+                   </table>
+                   </div>
+
+                   <Route path="/signup" component={SignUp} />
                     <Route exact path="/tag" render={(props) => <TagListContainer
                              isAuthenticated={this.state.isAuthenticated} updateHeading={this.updateTitle}/> }/>
                     <Route exact path="/tag/:name" render={(props) =>
                     <QuestionListContainer {...props} updateHeading={this.updateTitle} />}/>
+
+
+                    <Route exact path="/que_detail/:id" render={(props) =>
+                    <QuestionListContainerD {...props} updateHeading={this.updateTitle} />}/>
 
                     <Route exact path="/new" render={(props) =>
                     <NewQuestion isAuthenticated={this.state.isAuthenticated} updateHeading={this.updateTitle} />}/>
@@ -150,9 +171,29 @@ class App extends Component {
                     <VoteQuestion isAuthenticated={this.state.isAuthenticated} updateHeading={this.updateTitle} />}/>
                     <Route exact path="/answer" render={(props) =>
                     <AnswerQuestion isAuthenticated={this.state.isAuthenticated} updateHeading={this.updateTitle} />}/>
+                    <Route exact path="/unanswer" render={(props) =>
+                    <UnAnswerQuestion isAuthenticated={this.state.isAuthenticated} updateHeading={this.updateTitle} />}/>
+                    <Route path="/comments/:pk" render={(props)=>
+                                (this.cookies.get('username') && this.cookies.get('username')!='')?
+                                    <PostComment key={this.props.tabname} tabname={this.props.tabname}/>
+                                     :<Login
+                                    isAuthenticated={this.props.isAuthenticated}
+                                    username={this.props.username}
+                                    updateUsername={this.props.updateUsername}
+                                    updateStatus={this.props.updateLoginStatus}
 
-                    <Route path="/comments/:pk" component={PostComment} />
-                    <Route path="/answers/:pk" component={PostComment} />
+                                    /> }/>
+                       <Route path="/answers/:pk" render={(props)=>
+                                (this.cookies.get('username') && this.cookies.get('username')!='')?
+                                    <PostAnswer key={this.props.tabname} tabname={this.props.tabname}/>
+                                     :<Login
+                                    isAuthenticated={this.props.isAuthenticated}
+                                    username={this.props.username}
+                                    updateUsername={this.props.updateUsername}
+                                    updateStatus={this.props.updateLoginStatus}
+
+                                    /> } />
+                    <Route path="/post" component={PostQuestion} />
 
                 </div>
             </Router>

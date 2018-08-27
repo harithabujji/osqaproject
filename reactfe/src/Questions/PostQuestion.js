@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import './AddPost.css';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Cookies from 'universal-cookie';
@@ -13,8 +12,8 @@ class PostQuestion extends Component {
     this.state = {
       title: '',
       body: '',
-      tag:'',
-      posts: {}
+      tag:''
+
     };
 
   }
@@ -25,7 +24,8 @@ class PostQuestion extends Component {
             method: 'post',
              headers: {
               'Authorization': 'JWT '+(this.cookies.get('userJwtToken').token),
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+               'Accept': 'application/json'
            },
             body: JSON.stringify({
               "title":this.state.title,
@@ -44,7 +44,7 @@ class PostQuestion extends Component {
     this.setState({
       title: '',
       body: '',
-      tags:''
+      tag:''
     });
   }
 

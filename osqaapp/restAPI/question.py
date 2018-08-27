@@ -14,6 +14,7 @@ from rest_framework.views import APIView
 
 @csrf_exempt
 @api_view(['POST', 'GET'])
+@permission_classes((IsAuthenticated,))
 def question_list(request):
     if request.method == 'GET':
         snippets = Question.objects.all()
@@ -29,6 +30,16 @@ def question_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+
+@csrf_exempt
+@api_view(['GET'])
+@authentication_classes([])
+@permission_classes([])
+def questionss_list(request):
+    if request.method == 'GET':
+        snippets = Question.objects.all()
+        serializer = QuestionModelSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
 @csrf_exempt
@@ -79,10 +90,19 @@ def answer_question_list(request):
         return JsonResponse(serializer.data, safe=False)
 
 
+@authentication_classes([])
+@permission_classes([])
+def unanswer_question_list(request):
+    if request.method == 'GET':
+        snippets = Question.objects.filter(answercount=0)
+        serializer = QuestionModelSerializer(snippets, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+
 @csrf_exempt
 @api_view(['GET','PUT','DELETE'])
-@authentication_classes((SessionAuthentication, BasicAuthentication))
-@permission_classes((IsAuthenticated,))
+@authentication_classes([])
+@permission_classes([])
 def question_detail(request, pk):
     try:
         snippet = Question.objects.get(pk=pk)

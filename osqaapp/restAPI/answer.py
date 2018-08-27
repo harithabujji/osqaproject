@@ -6,6 +6,8 @@ from osqaapp.serializers import *
 
 
 
+
+
 @csrf_exempt
 @api_view(['GET', 'POST'])
 def answerquestion(request, pk):

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import QuestionList from './QuestionItems'
 import Cookies from 'universal-cookie';
 
-class Questions extends Component{
+class UnAnswerQuestion extends Component{
 
     cookies = new Cookies();
 
@@ -17,7 +17,7 @@ class Questions extends Component{
         console.log(this.props.isAuthenticated)
         console.log("inQuestions")
         this.props.updateHeading("Questions");
-            fetch('http://127.0.0.1:8000/osqaapp/api/v2/queestion/', {
+            fetch('http://127.0.0.1:8000/osqaapp/unanswerque/', {
                 method: 'GET',
                 }).then(function(response) {
                     return response.json();
@@ -36,4 +36,4 @@ class Questions extends Component{
     }
 }
 
-export default Questions
+export default UnAnswerQuestion
