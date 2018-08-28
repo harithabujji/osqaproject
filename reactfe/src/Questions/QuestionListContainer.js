@@ -1,18 +1,28 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie';
+import moment from 'moment'
 
 const QuestionItem = (props) => {
+ var str=props.question.question.tags;
+    var tags=str.split(',');
     return (
-        <tr>
-            <td>{props.question.question.title}</td> &nbsp;&nbsp;&nbsp;&nbsp;
-            <td>{props.question.question.description}</td> &nbsp;&nbsp;&nbsp;&nbsp;
-            <td>{props.question.question.tags}</td> &nbsp;&nbsp;&nbsp;&nbsp;
-            <td>{props.question.question.username}</td> &nbsp;&nbsp;&nbsp;&nbsp;
-            <td>{props.question.question.viewcount}</td> &nbsp;&nbsp;&nbsp;&nbsp;
-            <td>{props.question.question.votecount}</td> &nbsp;&nbsp;&nbsp;&nbsp;
-            <td> <button><Link to={'/comments/'+props.question.question.id}>Comment</Link></button></td>
-        </tr>
+       <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Answers<br />{props.question.question.answercount}</th>
+      <th scope="col">Votes<br />{props.question.question.votecount}</th>
+        <th scope="col" className="clss"><br /><Link to={'/que_detail/'+props.question.question.id+'/'}>{props.question.question.title}</Link> </th>
+          <p></p>
+      <th scope="col">{moment(props.question.question.time).format("MMM Do YY")+"| "}
+                Post By: {props.question.question.username}</th>
+    </tr>
+    <tr className="tags-alignf">   <div className="tags t-wordpress t-wordpress-theming t-custom-post-type">
+        { <QuestionTags tags={tags} /> }
+         </div>
+         </tr>
+  </thead>
+          </table>
     );
 }
 
@@ -28,12 +38,23 @@ const TableHead = (props) => {
 }
 
 
+const QuestionTags =({tags})=>{
+    return(
+        <div>
+                {
+                    tags.map(function(name, index){
+                    return <div className="post-tag" title="show questions tagged 'wordpress'" rel="tag">{name}</div>;
+                  })
+                }
+        </div>
+    );
+}
 const QuestionList = (props) => {
     console.log("list " + props.items)
     return (
             <div className={"container"}>
                 <table className={"table table-hover"}>
-                <TableHead items={['Title','','Description','','Tags','','User','','Views','','Votes']}/>
+
                 <tbody>
                 {props.items.map((question) =>
                 <QuestionItem question={question} key={question.id}/>

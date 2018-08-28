@@ -40,13 +40,11 @@ import { withRouter } from 'react-router'
             var days = 7;
                 var date = new Date();
                 var res = date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-                // this.cookies.set('userJwtToken', myJson, { path: '/',expires: new Date(Date.now()+2592000)} );
-                // this.cookies.set('username',formData.get('username'), {path : '/', expires: new Date(Date.now()+2592000)})
+
                 this.cookies.set('userJwtToken', myJson, { path: '/',expires: new Date(res)} );
                 this.cookies.set('username',this.state.username, {path : '/', expires: new Date(res)})
                 console.log(this.cookies.get('userJwtToken').token);
 
-                //this.props.updateStatus(true);
                 this.props.history.push('/');
 
                 console.log("Redirecting....")
@@ -69,7 +67,7 @@ import { withRouter } from 'react-router'
 
     render() {
       return (
-          <div className="container6">
+          <div className="containers">
            <form onSubmit={(e) => this.onHandleSubmit(e)}>
               <div className="forms">
 
@@ -99,7 +97,7 @@ import { withRouter } from 'react-router'
                 this.setState({ password: e.target.value }); }}/>
               </div>
               <div className="form-group2">
-                    <button className="submit">Post</button>
+                    <button className="submit">Sign Up</button>
               </div>
 
             </div>
@@ -108,27 +106,5 @@ import { withRouter } from 'react-router'
       );
     }
   }
-  const SignUpForm = () => (
-    <form>
-              <div className="form-group1">
-                 <input className="form-control2" onChange={this.saveFirstname} type="text" placeholder="Enter FirstName" name="uname" required/>
-                 <input className="form-control2" onChange={this.saveLastname} type="text" placeholder="Enter Lastname" name="uname" required/>
-              </div>
-              <div className="form-group1">
-                 <span className="titles1">UserName:</span>
-                 <input className="form-control1" onChange={this.saveUsername} type="text" placeholder="Enter Email-Id" name="uname" required/>
-              </div>
-              <div className="form-group1">
-                 <span className="titles1">Email Id:</span>
-                 <input className="form-control1" onChange={this.saveEmailId} type="text" placeholder="Enter Email-Id" name="uname" required/>
-              </div>
-              <div className="form-group1">
-                 <span className="titles1">Password:</span>
-                 <input className="form-control1" onChange={this.savePassword} type="text" placeholder="Enter Password" name="uname" required/>
-              </div>
-              <div className="form-group2">
-                    <button onClick={this.submit} className={"btn btn-primary"} type="submit">SignUp</button>
-              </div>
-             </form>
-  );
+
   export default withRouter(SignUp);

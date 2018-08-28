@@ -7,10 +7,29 @@
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
 }
-
+.tags-alignf
+{
+float:right;
+}
+.word-wrap {
+        word-break: break-all;
+        // word-wrap: break-word;
+        // overflow-wrap: break-word;
+    }
+    .no-wrap {
+        white-space: nowrap;
+    }
+    .fixed {
+        table-layout: fixed;
+    }
+ .clss{
+ word-wrap: break-word;
+ min-width: 160px;
+ max-width: 160px;
+ }
 .App-header {
   background-color: #48D1CC;
-  height: 80px;
+  height: 100%;
   padding: 20px;
   margin:0px;
   color: white;
@@ -20,7 +39,10 @@
   margin : 0px;
   float:left;
 }
-
+.side
+{
+ float:left;
+}
 .App-user{
   float:right;
   margin:0px;
@@ -53,3 +75,10 @@
     grid-template-columns: auto auto auto;
     padding: 10px;
   }
+
+     #loginform{
+   visibility: hidden;
+}
+           #tableh {
+   visibility: hidden;
+}

@@ -57,6 +57,3 @@ class QuestionModelSerializer(serializers.ModelSerializer):
         instance.save()
         return instance
 
-
-
-

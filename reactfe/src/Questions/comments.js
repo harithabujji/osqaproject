@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import QuestionList from './QuestionItems'
+import CommentList from './commentItems'
 import Cookies from 'universal-cookie';
 
-class Questions extends Component{
+class Commentsque extends Component{
 
     cookies = new Cookies();
 
@@ -12,13 +12,14 @@ class Questions extends Component{
     }
 
     componentDidMount() {
-        console.log("inQuestions")
+        console.log("inComments")
         console.log(this.cookies.get('userJwtToken'))
         console.log(this.props.isAuthenticated)
-        console.log("inQuestions")
-        this.props.updateHeading("Questions");
-            fetch('http://127.0.0.1:8000/osqaapp/api/v2/question/', {
+        console.log("inComments")
+
+            fetch('http://127.0.0.1:8000/osqaapp/commentsque/'+this.props.idque+'/', {
                 method: 'GET',
+
                 }).then(function(response) {
                     return response.json();
                 })
@@ -32,8 +33,8 @@ class Questions extends Component{
     render(){
         console.log("TodoItemContainer");
         console.log(this.state.list)
-        return <QuestionList items={this.state.list}/> ;
+        return <CommentList items={this.state.list}/> ;
     }
 }
 
-export default Questions
+export default Commentsque

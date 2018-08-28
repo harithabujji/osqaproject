@@ -64,16 +64,18 @@ class Login extends Component{
         })
         .then((myJson) => {
             if ('token' in myJson){
-                this.cookies.set('userJwtToken', myJson, { path: '/',expires: new Date(Date.now()+2592000)} );
-                this.cookies.set('username',formData.get('username'), {path : '/', expires: new Date(Date.now()+2592000)})
-                console.log(this.cookies.get('userJwtToken'));
-                this.props.updateUsername(formData.get('username'));
-                this.props.updateStatus(true);
+                var days = 15;
+                  var date = new Date();
+                  var res = date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                  this.cookies.set('userJwtToken', myJson, { path: '/',expires: new Date(res)} );
+                  this.cookies.set('username',formData.get('username'), {path : '/', expires: new Date(res)})
+                  console.log(this.cookies.get('userJwtToken').token);
+                  this.props.updateUsername(formData.get('username'));
 
                 this.setState(prev => ( {buttonName : 'Logout'}));
 
                this.props.history.push('/');
-                console.log("Redirecting....")
+
             }
             else{
                 alert("Invalid Credentials");
@@ -84,12 +86,32 @@ class Login extends Component{
 
     render(){
         return (
-            <div className={"App-user"}>
-                <input onChange={this.saveUsername} type="text" placeholder="Enter username"/><br/>
-                <input onChange={this.savePassword} type="password" placeholder="Enter Password"/><br/>
-                <button onClick={this.submit} className={"btn btn-primary"} value="Login">Login</button>
-                <button onClick={this.signsubmit} className={"btn btn-primary"} value="SignUp">SignUp</button>
+         <div className="containers">
+           <form onSubmit={(e) => this.onHandleSubmit(e)}>
+              <div className="forms">
+                   <div className="form-group1">
+                  <span className="titles1">User Name</span>
+                   <input onChange={this.saveUsername} type="text" placeholder="Enter username"/><br/>
+                    </div>
+
+                   <div className="form-group1">
+                   <span className="titles1">Password</span>
+                   <input onChange={this.savePassword} type="password" placeholder="Enter Password"/><br/>
+                  </div>
+
+              <div className="form-group2">
+               <button onClick={this.submit} className={"btn btn-primary btn-sm"} value="Login">Login</button>
+               </div>
+
+
+              <div className="form-group2">
+                <button onClick={this.signsubmit} className={"btn btn-primary btn-sm"} value="SignUp">SignUp</button>
+                </div>
+
             </div>
+        </form>
+        </div>
+
         )
     }
 }

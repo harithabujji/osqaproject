@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import QuestionList from './QuestionItems'
+import AnswerList from './AnswerItems'
 import Cookies from 'universal-cookie';
 
-class Questions extends Component{
+class Answersque extends Component{
 
     cookies = new Cookies();
 
@@ -12,13 +12,14 @@ class Questions extends Component{
     }
 
     componentDidMount() {
-        console.log("inQuestions")
+        console.log("inAnswers")
         console.log(this.cookies.get('userJwtToken'))
         console.log(this.props.isAuthenticated)
-        console.log("inQuestions")
-        this.props.updateHeading("Questions");
-            fetch('http://127.0.0.1:8000/osqaapp/api/v2/question/', {
+        console.log("inAnswers")
+
+            fetch('http://127.0.0.1:8000/osqaapp/answersque/'+this.props.idque+'/', {
                 method: 'GET',
+
                 }).then(function(response) {
                     return response.json();
                 })
@@ -32,8 +33,8 @@ class Questions extends Component{
     render(){
         console.log("TodoItemContainer");
         console.log(this.state.list)
-        return <QuestionList items={this.state.list}/> ;
+        return <AnswerList items={this.state.list}/> ;
     }
 }
 
-export default Questions
+export default Answersque

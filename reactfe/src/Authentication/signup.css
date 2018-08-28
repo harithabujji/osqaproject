@@ -1,7 +1,7 @@
 
-.container6{
-    width:40%;
-    height:200%;
+.containers{
+    width:100%;
+    height:150%;
     color:red;
     padding-top: 10%;
     padding-right: 15%;
@@ -93,7 +93,7 @@
   .form-group
   {
      padding-top: 2.5%;
-    /* padding-bottom: 15px; */
+
   }
   .form-control
   {

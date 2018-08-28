@@ -18,11 +18,14 @@ urlpatterns=[
 
         path('que_detail/<int:pk>/', question_detail),
 
-        url('comments/<int:pk>/', commentquestion),
-        path('commentsview/<int:pk>/', csrf_exempt(commentquestionview.as_view()),name='cmnts'),
+
         path('comment_detail/<int:pk>/<int:c_id>/',comment_detail),
 
+        path('cmnts/<int:pk>/',commentquestions),
+        path('commentsque/<int:pk>/',comment_question),
+
         path('answers/<int:pk>/',answerquestion),
+        path('answersque/<int:pk>/',answer_question),
         path('ans_detail/<int:pk>/<int:a_id>/', answer_detail),
 
         path('views/<int:pk>/',viewsonquestion),

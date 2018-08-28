@@ -6,36 +6,24 @@ import './display.css';
 const QuestionItem = (props) => {
     var str=props.question.tags;
     var tags=str.split(',');
+
     return (
-   <div className="mb">
-   <div className="container">
-   <div className="border-header">
-   <table className="tableh" >
-        <tr>
-        <td style={{width:"15%" , align:"right"}}>{props.question.votecount}<br/> Votes</td>
-        <td style={{width:"15%" , align:"right"}}>{props.question.answercount}<br/>Answers</td>
-        <td style={{width:"15%" , align:"right"}}>{props.question.viewcount}<br/> Views</td>
-           <td class="col-md-6">
-                  <div id="wrap-post" style={{color:"blue"}} ><Link to={'/que_detail/'+props.question.id+'/'}>{props.question.title}</Link></div></td>
-                  <br/>
-                <div id="author" style={{float:'right', display:'block'}}>
-                 <p>{moment(props.question.time).format("MMM Do YY")+"| "}
-                Post By: {props.question.username}</p>
-                </div>
-                 <div className="tags t-wordpress t-wordpress-theming t-custom-post-type">
-        {
-
-            <QuestionTags tags={tags} />
-
-        }
+       <table class="table table-striped">
+  <thead>
+    <tr>
+          <th scope="col">Answers<br />{props.question.answercount}</th>
+      <th scope="col">Votes<br />{props.question.votecount}</th>
+        <th scope="col" className="clss"><br /><Link to={'/que_detail/'+props.question.id+'/'}>{props.question.title}</Link> </th>
+          <p></p>
+      <th scope="col">{moment(props.question.time).format("MMM Do YY")+"| "}
+                Post By: {props.question.username}</th>
+    </tr>
+    <tr className="tags-alignf">   <div className="tags t-wordpress t-wordpress-theming t-custom-post-type">
+        { <QuestionTags tags={tags} /> }
          </div>
- </tr>
-
-                </table>
-   </div>
-   </div>
-   </div>
-
+         </tr>
+  </thead>
+          </table>
     );
 }
 
@@ -65,7 +53,7 @@ const QuestionList = (props) => {
     return (
             <div className={"container"}>
                 <table className={"table table-hover"}>
-                <TableHead items={['Title','','Description','','Tags','','User','','Views','','Votes','','Time']}/>
+
                 <tbody>
                 {props.items.map((question) =>
                 <QuestionItem question={question} key={question.id}/>

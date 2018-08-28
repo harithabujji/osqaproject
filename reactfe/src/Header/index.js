@@ -49,7 +49,9 @@ export class Header extends Component{
         <div>
 
                <h1 className={"App-name"}>{this.props.title} </h1>
+
            <div>
+
 
                    <ul className="header-ul">
 
@@ -57,7 +59,7 @@ export class Header extends Component{
                                      <p className={"App-user"}>
                         <label className={"username"}>
                         { this.props.isAuthenticated ? "Welcome," + this.props.username : "Explore my World by"}</label><br/>
-                        <button className={"btn btn-primary login-button"}
+                        <button className={"btn btn-dark btn-small login-button"}
                              onClick={
                                     this.props.isAuthenticated?
                                     this.logout : this.login
@@ -67,15 +69,12 @@ export class Header extends Component{
                         </button>
                         </p>
                                 </li>
+                                <br/> &nbsp;&nbsp;&nbsp;&nbsp;
 
-
-                                <li className="header-li">
+                                <li className="btn header-li">
                                     <Link className="headerlinks" to="/about">About</Link>
                                 </li>
 
-                                <li className="header-li">
-                                    <Link className="headerlinks" to="/faq">FAQ</Link>
-                                </li>
 
                             </ul>
 

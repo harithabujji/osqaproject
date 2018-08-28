@@ -4,7 +4,9 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import Cookies from 'universal-cookie';
 import { withRouter } from 'react-router'
+import Commentsque from '../Questions/comments'
 import renderHTML from 'react-render-html';
+
 
 class PostComment extends Component {
    cookies = new Cookies();
@@ -19,7 +21,7 @@ class PostComment extends Component {
 
   onHandleSubmit(e) {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/osqaapp/comments/'+ this.props.match.params.pk + '/', {
+    fetch('http://127.0.0.1:8000/osqaapp/cmnts/'+ this.props.match.params.pk + '/', {
             method: 'post',
              headers: {
               'Authorization': 'JWT '+(this.cookies.get('userJwtToken').token),
@@ -47,6 +49,7 @@ class PostComment extends Component {
     return (
       <div>
       <div className="container">
+      <Commentsque idque={this.props.match.params.pk}/>
         <form onSubmit={(e) => this.onHandleSubmit(e)}>
         <h2><b>Give a Comment</b></h2>
         <hr/>

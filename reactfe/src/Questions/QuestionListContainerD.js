@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Cookies from 'universal-cookie';
-
+import Answersque from './Answers'
+import NewQuestion from './NewQuestion'
 const QuestionItem = (props) => {
     return (
         <tr>
@@ -10,7 +11,8 @@ const QuestionItem = (props) => {
             <td>
 
             </td>
-            <td> <button><Link to={'/comments/'+props.items.id}>Comment</Link></button></td>
+            <td> <button  type="button" class="btn btn-pill btn-info"><Link to={'/comments/'+props.items.id}>Comment</Link></button></td>
+
         </tr>
     );
 }
@@ -43,7 +45,7 @@ class QuestionListContainerD extends Component{
 
     onHandleSubmit(e) {
     e.preventDefault();
-    fetch('http://127.0.0.1:8000/osqaapp/comments/'+ 1 + '/', {
+    fetch('http://127.0.0.1:8000/osqaapp/answers/'+ this.props.match.params.id + '/', {
             method: 'post',
              headers: {
               'Authorization': 'JWT '+(this.cookies.get('userJwtToken').token),
@@ -75,17 +77,20 @@ class QuestionListContainerD extends Component{
         <div>
         <QuestionItem items={this.state.list}/>
 
+
+         <Answersque idque={this.props.match.params.id}/>
+
         <div className="container">
         <form onSubmit={(e) => this.onHandleSubmit(e)}>
-        <h2><b>Give a Comment</b></h2>
+        <h2><b>Your Answer</b></h2>
         <hr/>
           <div className="form-group">
-          <p className="titles">comment:</p>
-           <input className="form-control" value={this.state.text} type="textarea" name="comment" placeholder="Comment"
+          <h1 className="titles">Answer:</h1>
+           <input className="form-control" value={this.state.text} type="textarea" name="comment" placeholder="Enter your answer here"
               onChange={e => {this.setState({ text: e.target.value });  }}  ref="text"  />
           </div>
           <div className="form-button">
-          <button className="submit">Post</button>
+          <button className="submit">Submit</button>
           </div>
            </form>
         <br />
